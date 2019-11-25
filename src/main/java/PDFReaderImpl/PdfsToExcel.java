@@ -37,15 +37,15 @@ public class PdfsToExcel {
 
 	private void convertAll() throws IOException {
 		Files.list(directoryWithPDFs)
-				.filter(Files::isRegularFile)
-				.filter(this::isPdf)
-				.map(Path::toFile)
-				.map(PDFLinesExtractor::new)
-				.map(PDFLinesExtractor::getLines)
-				.map(ToExcelFormatter::new)
-				.map(ToExcelFormatter::paddedForExcel)
+				.filter(path1 -> Files.isRegularFile(path1))
+				.filter(path2 -> isPdf(path2))
+				.map(path -> path.toFile())
+				.map(file -> new PDFLinesExtractor(file))
+				.map(pdfLinesExtractor -> pdfLinesExtractor.getLines())
+				.map(initialLines -> new ToExcelFormatter(initialLines))
+				.map(toExcelFormatter -> toExcelFormatter.paddedForExcel())
 				.findAny()
-				.ifPresent(WriteToExcelImpl::checkPattern);
+				.ifPresent(lines -> WriteToExcelImpl.checkPattern(lines));
 	}
 
 
