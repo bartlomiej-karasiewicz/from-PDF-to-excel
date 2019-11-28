@@ -1,23 +1,19 @@
 package PDFReaderImpl
 
-import spock.lang.Ignore
 import spock.lang.Specification
 
-@Grab('cglib:cglib:3.1')
-@Grab('org.ow2.asm:asm-all:5.0.3')
+
 class PDFLinesExtractorTest extends Specification {
 
-    @Ignore
-    def "Extract lines from PDF"(){
+    def "extract lines from PDF"(){
         given:
-        def mockFile=Mock(File)
-        PDFLinesExtractor pdfLinesExtractor=new PDFLinesExtractor(mockFile)
-        List<String> arr=[]
-
+        File file=new File("src/test/resources/dummy.pdf")
+        PDFLinesExtractor pdfLinesExtractor=new PDFLinesExtractor(file)
+        List<String> getLines= new ArrayList<>()
         when:
-        pdfLinesExtractor.getLines() >> arr
-
+        getLines << pdfLinesExtractor.getLines()
         then:
-        arr.size()>1
+        getLines.size()>=1
+
     }
 }
