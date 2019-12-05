@@ -5,8 +5,7 @@ import spock.lang.Specification
 
 class ToExcelFormatterTest extends Specification {
 
-
-    def "adding nulls as String at the end of the list"(){
+    def "should added nulls as String at the end of the list"(){
         given:
         File file=new File("src/test/resources/pa20_file.pdf")
         PDFLinesExtractor pdfLinesExtractor=new PDFLinesExtractor(file)

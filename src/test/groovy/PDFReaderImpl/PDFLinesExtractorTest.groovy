@@ -15,7 +15,7 @@ class PDFLinesExtractorTest extends Specification {
         ["PDF_file "]==pdfLinesExtractor.getLines()
     }
     @Ignore
-    def "should throw exception when extract lines from PDF with password"(){
+    def "should throw exception during extract lines when PDF is with password"(){
         given:
         File file=new File("src/test/resources/encrypted.pdf")
         PDFLinesExtractor pdfLinesExtractor=new PDFLinesExtractor(file)
@@ -23,6 +23,14 @@ class PDFLinesExtractorTest extends Specification {
         pdfLinesExtractor.getLines()
         then:
         thrown (EncryptedDocumentException)
-
+    }
+    def "should throw exception during extract lines when file is broke"(){
+        given:
+        File file=new File("src/test/resources/IOException.pdf")
+        PDFLinesExtractor pdfLinesExtractor=new PDFLinesExtractor(file)
+        when:
+        List<String> listOfStrings= pdfLinesExtractor.getLines()
+        then:
+        listOfStrings.isEmpty()
     }
 }

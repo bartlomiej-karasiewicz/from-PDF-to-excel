@@ -1,16 +1,13 @@
 package PDFReaderImpl;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.encryption.InvalidPasswordException;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.poi.EncryptedDocumentException;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 class PDFLinesExtractor {
@@ -32,6 +29,5 @@ class PDFLinesExtractor {
             e.printStackTrace();
             return Collections.emptyList();
         }
-
     }
 }
